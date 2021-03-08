@@ -1,0 +1,5 @@
+Frontend integration example: Using logs embed without auth context with custom UI
+==================================================================================
+- Bootstrapped with create-react-app.
+- Does not include a backend.
+- Requires that session token is manually set.

@@ -1,0 +1,80 @@
+body {
+  font-family: -apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+}
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.logs--container {
+  max-width: 970px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.logs--row {
+  box-shadow: inset 0 -1px 0 0 #e3e8ee;
+}
+
+.logs--row > td {
+  height: 40px;
+  padding: 0px 20px;
+}
+
+.logs--status__badge {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background-color: #e3e8ee;
+  font-size: 12px;
+}
+
+.logs--route {
+  font-weight: 500;
+}
+
+.logs--detail {
+  padding: 0px; 
+}
+
+.logs--detail h2 {
+  margin: 0 0 15px;
+}
+
+.logs--detail-response {
+  text-align: left;
+}
