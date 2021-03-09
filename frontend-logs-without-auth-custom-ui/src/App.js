@@ -62,7 +62,7 @@ function App() {
       <LogsProvider kioskApi={kioskApi} options={{
         pollingIntervalMs: 10000,
       }}>
-        <CountdownCompanyLogs />
+        <CustomLogInterface />
       </LogsProvider>
     );
   }
@@ -75,7 +75,7 @@ function App() {
   );
 }
 
-function CountdownCompanyLogs() {
+function CustomLogInterface() {
   const logs = useLogs();
 
   const [selectedLogId, setSelectedLogId] = useState(null);
