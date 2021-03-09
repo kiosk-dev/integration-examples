@@ -26,7 +26,7 @@ An example backend server is provided that wraps the `@kiosk-dev/kiosk-node`
 node.js library. The frontend examples all depend on this server by default.
 ```sh
 # Start example server on port 8000
-$ KIOSK_SECRET_KEY="<pk_...>" make start-server
+$ KIOSK_SECRET_KEY='pk_sec_test_...' make start-server
 ```
 
 ## Examples
@@ -43,8 +43,9 @@ as fast as possible.
 
 To run this example:
 ```sh
+$ cd frontend-logs-without-auth
 # Start development server.
-$ (cd frontend-logs-without-auth && npm run start)
+$ REACT_APP_KIOSK_PUBLISHABLE_TEST_KEY='pk_pub_test_...' npm run start
 ```
 
 Roughly, the example:
@@ -67,8 +68,9 @@ logs and pagination.
 
 To run this example:
 ```sh
+$ cd frontend-logs-without-auth-custom-ui
 # Start development server.
-$ (cd frontend-logs-without-auth-custom-ui && npm run start)
+$ REACT_APP_KIOSK_PUBLISHABLE_TEST_KEY='pk_pub_test_...' npm run start
 ```
 
 Roughly, the example:

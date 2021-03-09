@@ -10,47 +10,57 @@ import {
 } from '@kiosk-dev/embeds';
 import { Client as Kiosk } from '@kiosk-dev/kiosk-node';
 
-const PUBLISHABLE_KEY = 'pk_pub_test_545e9c2345f08beeb053f614b037072c';
+const PUBLISHABLE_KEY = process.env.REACT_APP_KIOSK_PUBLISHABLE_TEST_KEY;
 
 /**
  * Loads a Kiosk session token from the provided example server.
  */
 const loadKioskApi = async () => {
-  const sessionResp = await fetch('http://localhost:8000/session');
-  if (sessionResp.status === 500) {
-    throw new Error('could not load session');
+  if (PUBLISHABLE_KEY == null) {
+    throw new Error('Set REACT_APP_KIOSK_PUBLISHABLE_TEST_KEY before starting this app.');
   }
-  const body = await sessionResp.json();
-  return new Kiosk({
-    testMode: true,
-    runtime: 'client',
-    auth: {
-      sessionToken: body.sessionToken,
-      publishableKey: PUBLISHABLE_KEY,
-    },
-    host: 'http://localhost:3001/v1',
-  });
+
+  try {
+    const sessionResp = await fetch('http://localhost:8000/session');
+    if (sessionResp.status === 500) {
+      throw new Error('could not load session');
+    }
+    const body = await sessionResp.json();
+    return new Kiosk({
+      testMode: true,
+      runtime: 'client',
+      auth: {
+        sessionToken: body.sessionToken,
+        publishableKey: PUBLISHABLE_KEY,
+      },
+    });
+  } catch (e) {
+    throw new Error(`could not load session, check server? ${e.message}`);
+  }
 };
 
 
 function App() {
   // Initialize kiosk API client from session pulled from backend.
   const [kioskApi, setKioskApi] = React.useState(null);
-  const [hasError, setHasError] = React.useState(false);
+  const [error, setError] = React.useState(null);
   React.useEffect(() => {
     loadKioskApi().then((client) => {
       setKioskApi(client);
     }).catch((e) => {
       console.error('Error loading session', e);
-      setHasError(true);
+      setError(e);
     });
   }, []);
 
   let body;
   if (kioskApi == null) {
-    if (hasError) {
+    if (error != null) {
       body = (
-        <p>Could not load session, is the server running?</p>
+        <>
+          <p>Could not load session, is the server running?</p>
+          <pre>{error.message}</pre>
+        </>
       );
     } else {
       body = (
@@ -81,6 +91,11 @@ function CustomLogInterface() {
   const [selectedLogId, setSelectedLogId] = useState(null);
   const selectedLog = (selectedLogId == null | logs.logs == null) ? null : logs.logs.find(l => l.id === selectedLogId);
 
+  if (logs.logs != null && logs.logs.length === 0) {
+    return (
+      <p>No logs to show. Add a log with <code>POST /v1/logs</code>.</p>
+    );
+  }
   return (
     <div className="logs--container">
       <div className="logs--table">
