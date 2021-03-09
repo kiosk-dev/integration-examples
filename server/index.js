@@ -4,14 +4,16 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 8000;
 
-if (process.env.KIOSK_SECRET_KEY == null) {
-  throw new Error('Set KIOSK_SECRET_KEY before starting this server.');
+const SECRET_KEY = process.env.KIOSK_SECRET_TEST_KEY;
+if (SECRET_KEY == null) {
+  throw new Error('Set KIOSK_SECRET_TEST_KEY before starting this server.');
 }
+
 const kioskClient = new Client({
   testMode: true,
   runtime: 'server',
   auth: {
-    secretKey: process.env.KIOSK_SECRET_KEY,
+    secretKey: SECRET_KEY,
   },
 });
 

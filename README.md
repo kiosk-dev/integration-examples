@@ -26,7 +26,9 @@ An example backend server is provided that wraps the `@kiosk-dev/kiosk-node`
 node.js library. The frontend examples all depend on this server by default.
 ```sh
 # Start example server on port 8000
-$ KIOSK_SECRET_KEY='pk_sec_test_...' make start-server
+# Set the environment variable `KIOSK_SECRET_TEST_KEY` to be your Kiosk `test`
+# environment secret key before you start the server.
+$ KIOSK_SECRET_TEST_KEY='pk_sec_test_...' make start-server
 ```
 
 ## Examples
@@ -45,6 +47,8 @@ To run this example:
 ```sh
 $ cd frontend-logs-without-auth
 # Start development server.
+# Set the environment variable `REACT_APP_KIOSK_PUBLISHABLE_TEST_KEY` to be
+# your Kiosk `test` environment publishable key before you start the app.
 $ REACT_APP_KIOSK_PUBLISHABLE_TEST_KEY='pk_pub_test_...' npm run start
 ```
 
@@ -70,6 +74,8 @@ To run this example:
 ```sh
 $ cd frontend-logs-without-auth-custom-ui
 # Start development server.
+# Set the environment variable `REACT_APP_KIOSK_PUBLISHABLE_TEST_KEY` to be
+# your Kiosk `test` environment publishable key before you start the app.
 $ REACT_APP_KIOSK_PUBLISHABLE_TEST_KEY='pk_pub_test_...' npm run start
 ```
 
