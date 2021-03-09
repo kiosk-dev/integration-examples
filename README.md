@@ -53,12 +53,17 @@ $ REACT_APP_KIOSK_PUBLISHABLE_TEST_KEY='pk_pub_test_...' npm run start
 ```
 
 Roughly, the example:
-- Makes a request to the example backend. The example backend:
-  - Creates a team via `POST /v1/teams`
-  - Creates a session for that team via `POST /v1/sessions`
+- Makes a request to the example backend. The example backend ([src][backend-src]):
+  - Initializes a Kiosk API client with a secret key.
+  - Creates a team via `POST /v1/teams`.
+  - Creates a session for that team via `POST /v1/sessions`.
   - Returns the session token from the `POST /v1/sessions` response.
-- Initializes a Kiosk API client.
-- Renders a Kiosk `LogsEmbed` with the Kiosk API client.
+- The frontend, after receiving the session token from the backend ([src][frontend-src]):
+  - Initializes a Kiosk API client with the session token.
+  - Renders a Kiosk `LogsEmbed` with the Kiosk API client.
+
+[backend-src]: https://github.com/kiosk-dev/integration-examples/blob/7046098/server/index.js
+[frontend-src]: https://github.com/kiosk-dev/integration-examples/blob/7046098/frontend-logs-without-auth/src/App.js#L61-L63
 
 ### Frontend Kiosk Logs integration with a custom interface
 [Source](frontend-logs-without-auth-custom-ui)
@@ -80,13 +85,18 @@ $ REACT_APP_KIOSK_PUBLISHABLE_TEST_KEY='pk_pub_test_...' npm run start
 ```
 
 Roughly, the example:
-- Makes a request to the example backend. The example backend:
+- Makes a request to the example backend. The example backend ([src][backend-src]):
+  - Initializes a Kiosk API client with a secret key.
   - Creates a team via `POST /v1/teams`
   - Creates a session for that team via `POST /v1/sessions`
   - Returns the session token from the `POST /v1/sessions` response.
-- Initializes a Kiosk API client.
-- Renders a Kiosk `LogsProvider` with the Kiosk API client and the
-  `CustomLogInterface` as a descendant of the `LogsProvider`.
-  - `LogsProvider` handles details such as the initial fetch of the first page
-    of logs and provides helpers for fetching more pages of logs.
-  - `CustomLogInterface` uses the `useLogs` React hook to read the logs.
+- The frontend, after receiving the session token from the backend ([src][frontend-src]):
+  - Initializes a Kiosk API client with the session token.
+  - Renders a Kiosk `LogsProvider` with the Kiosk API client and the
+    `CustomLogInterface` as a descendant of the `LogsProvider`.
+    - `LogsProvider` handles details such as the initial fetch of the first page
+      of logs and provides helpers for fetching more pages of logs.
+    - `CustomLogInterface` uses the `useLogs` React hook to read the logs.
+
+[backend-src]: https://github.com/kiosk-dev/integration-examples/blob/7046098/server/index.js
+[frontend-src]: https://github.com/kiosk-dev/integration-examples/blob/7046098/frontend-logs-without-auth-custom-ui/src/App.js#L72-L76
