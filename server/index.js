@@ -23,13 +23,16 @@ let teamId = null;
 app.get('/session', cors(), async (req, res) => {
   try {
     if (teamId == null) {
+      // Create a team if one has not been created already. In a production
+      // app, these team IDs should be read from a database rather than stored
+      // in memory.
       const createTeamResponse = await kioskClient.teams.create({
         name: `Example Team #${Math.floor(100 * Math.random())}`,
-
       });
       teamId = createTeamResponse.team.id
       console.log(`Created team ${teamId}`);
     }
+    // Create a session for the team for the admin role.
     const { session_token: { value: sessionToken } } = await kioskClient.sessions.create({
       team_id: teamId,
       role: 'admin',
