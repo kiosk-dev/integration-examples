@@ -63,7 +63,10 @@ function App() {
   if (kioskApi == null) {
     if (error != null) {
       body = (
-        <p>Could not load session, is the server running?</p>
+        <>
+          <p>Could not load session, is the server running?</p>
+          <pre>{error.message}</pre>
+        </>
       );
     } else {
       body = (
