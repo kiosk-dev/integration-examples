@@ -90,7 +90,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Logs</h1>
+      <h1>Logs (click row for details)</h1>
       {body}
       <br></br>
       <button onClick={createLog}>Create example log</button>
