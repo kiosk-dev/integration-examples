@@ -2,6 +2,7 @@
 setup:
 	(cd frontend-logs-without-auth && npm install)
 	(cd frontend-logs-without-auth-custom-ui && npm install)
+	(cd frontend-keys-and-logs-without-auth && npm install)
 	(cd server && npm install)
 
 .PHONY: start-server
