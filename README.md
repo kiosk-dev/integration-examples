@@ -22,19 +22,24 @@ $ make setup
 ```
 
 # Running examples
+
+Each example app consists of a backend and frontend.
+
+## 1. Start the backend server
 An example backend server is provided that wraps the `@kiosk-dev/kiosk-node`
 node.js library. The frontend examples all depend on this server by default.
 ```sh
 # Start example server on port 8000
-# Set the environment variable `KIOSK_SECRET_TEST_KEY` to be your Kiosk `test`
-# environment secret key before you start the server.
+# Set the environment variable `KIOSK_SECRET_TEST_KEY`
+# to be your Kiosk `test` secret key before you start
+# the server.
 $ KIOSK_SECRET_TEST_KEY='pk_sec_test_...' make start-server
 ```
 
-## Examples
+## 2. Pick a frontend example
 The following example integrations are provided:
 
-### Frontend Kiosk Logs integration
+### Example A: Frontend Kiosk Logs integration
 [Source](frontend-logs-without-auth)
 
 This shows a Kiosk Logs integration that is authenticated by Kiosk sessions
@@ -43,12 +48,13 @@ generated on the backend. See
 This example is useful if you want to get a log exploration interface running
 as fast as possible.
 
-To run this example:
+To run this example (may take ~30s to compile the first time):
 ```sh
 $ cd frontend-logs-without-auth
 # Start development server.
-# Set the environment variable `REACT_APP_KIOSK_PUBLISHABLE_TEST_KEY` to be
-# your Kiosk `test` environment publishable key before you start the app.
+# Set the environment variable `REACT_APP_KIOSK_PUBLISHABLE_TEST_KEY`
+# to be your Kiosk `test` publishable key before you start
+# the app.
 $ REACT_APP_KIOSK_PUBLISHABLE_TEST_KEY='pk_pub_test_...' npm run start
 ```
 
@@ -65,7 +71,7 @@ Roughly, the example:
 [backend-src]: https://github.com/kiosk-dev/integration-examples/blob/7046098/server/index.js
 [frontend-src]: https://github.com/kiosk-dev/integration-examples/blob/7046098/frontend-logs-without-auth/src/App.js#L61-L63
 
-### Frontend Kiosk Logs integration with a custom interface
+### Example B: Frontend Kiosk Logs integration with a custom interface
 [Source](frontend-logs-without-auth-custom-ui)
 
 This shows a Kiosk Logs integration with a custom UI that is authenticated by
