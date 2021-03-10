@@ -39,6 +39,17 @@ const loadKioskApi = async () => {
   }
 };
 
+const createLog = async () => {
+  try {
+    const logResp = await fetch('http://localhost:8000/demo-log');
+    if (logResp.status === 500) {
+      throw new Error(JSON.stringify(logResp.body));
+    }
+  } catch (e) {
+    window.alert('failed to create log ' + e.message);
+  }
+}
+
 
 function App() {
   // Initialize kiosk API client from session pulled from backend.
@@ -79,8 +90,10 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Logs</h1>
+      <h1>Logs (click row for details)</h1>
       {body}
+      <br></br>
+      <button onClick={createLog}>Create example log</button>
     </div>
   );
 }

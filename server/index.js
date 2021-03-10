@@ -48,6 +48,52 @@ app.get('/session', cors(), async (req, res) => {
   }
 });
 
+app.get('/demo-log', cors(), async (req, res) => {
+  try {
+    if (teamId == null) {
+      res.json({});
+      return;
+    }
+    // Get a key and validate it to show usage in the embed
+    const { keys } = await kioskClient.keys.list({ team_id: teamId });
+    if (keys.length === 0) {
+      res.json({});
+      return;
+    }
+    // Note: do not log secret key tokens in production! key IDs are
+    // always safe to log since they are simply identifiers.
+    console.log(`Using key ${keys[0].id}`);
+    await kioskClient.keys.validate({
+      team_key: keys[0].token,
+      environment: keys[0].environment,
+    });
+    // Create a log
+    const { log } = await kioskClient.logs.create({
+      team_id: teamId,
+      timestamp: (new Date()).toISOString(),
+      route: '/demo-log',
+      response_code: 200,
+      request_body: {
+        'some_key': 'some_value',
+      },
+      response_body: {
+        'success': 'true',
+        'id': (Math.random() * 10).toFixed(0).toString(),
+      },
+      environment: 'testing'
+    });
+    console.log(`Created log ${log.id}`);
+    res.json({
+      log,
+    });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({
+      error: e,
+    });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });

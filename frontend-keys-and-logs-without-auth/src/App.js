@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 
 import {
+  KeysEmbed,
   LogsEmbed,
 } from '@kiosk-dev/embeds';
 import { Client as Kiosk } from '@kiosk-dev/kiosk-node';
@@ -73,6 +74,8 @@ function App() {
   } else {
     body = (
       <div>
+        <h1>Keys</h1>
+        <KeysEmbed kioskApi={kioskApi} options={{environments: ['testing', 'production']}}/>
         <h1>Logs</h1>
         <LogsEmbed kioskApi={kioskApi} />
         <br></br>
