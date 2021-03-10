@@ -1,7 +1,10 @@
 import React from 'react';
 import './App.css';
 
-import { LogsEmbed } from '@kiosk-dev/embeds';
+import {
+  KeysEmbed,
+  LogsEmbed,
+} from '@kiosk-dev/embeds';
 import { Client as Kiosk } from '@kiosk-dev/kiosk-node';
 
 const PUBLISHABLE_KEY = process.env.REACT_APP_KIOSK_PUBLISHABLE_TEST_KEY;
@@ -20,6 +23,7 @@ const loadKioskApi = async () => {
       throw new Error('could not load session');
     }
     const body = await sessionResp.json();
+    console.log('using session ' + body.sessionToken);
     return new Kiosk({
       testMode: true,
       runtime: 'client',
@@ -32,6 +36,17 @@ const loadKioskApi = async () => {
     throw new Error(`could not load session, check server? ${e.message}`);
   }
 };
+
+const createLog = async () => {
+  try {
+    const logResp = await fetch('http://localhost:8000/demo-log');
+    if (logResp.status === 500) {
+      throw new Error(JSON.stringify(logResp.body));
+    }
+  } catch (e) {
+    window.alert('failed to create log ' + e.message);
+  }
+}
 
 function App() {
   // Initialize kiosk API client from session pulled from backend.
@@ -59,13 +74,19 @@ function App() {
     }
   } else {
     body = (
-      <LogsEmbed kioskApi={kioskApi} />
+      <div>
+        <h1>Keys</h1>
+        <KeysEmbed kioskApi={kioskApi} options={{environments: ['testing', 'production']}}/>
+        <h1>Logs</h1>
+        <LogsEmbed kioskApi={kioskApi} />
+        <br></br>
+        <button onClick={createLog}>Create example log</button>
+      </div>
     );
   }
 
   return (
     <div className="App">
-      <h1>Logs</h1>
       {body}
     </div>
   );
