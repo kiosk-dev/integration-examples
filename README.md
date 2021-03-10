@@ -7,9 +7,11 @@ building a developer dashboard with Kiosk looks like.
    * [Prerequisites](#prerequisites)
    * [Setup](#setup)
    * [Running examples](#running-examples)
-      * [Examples](#examples)
-         * [Frontend Kiosk Logs integration](#frontend-kiosk-logs-integration)
-         * [Frontend Kiosk Logs integration with a custom interface](#frontend-kiosk-logs-integration-with-a-custom-interface)
+      * [1. Start the backend server](#1-start-the-backend-server)
+      * [2. Pick a frontend example](#2-pick-a-frontend-example)
+         * [Example A: Frontend Kiosk Logs integration](#example-a-frontend-kiosk-logs-integration)
+         * [Example B: Frontend Kiosk Logs integration with a custom interface](#example-b-frontend-kiosk-logs-integration-with-a-custom-interface)
+
 
 # Prerequisites
 - Kiosk API keys
