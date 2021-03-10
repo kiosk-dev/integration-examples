@@ -23,6 +23,8 @@ building a developer dashboard with Kiosk looks like.
 $ make setup
 ```
 
+Note: We recommend using `npm` version 7+ since the `package-lock.json` files are `v2`. The included `.nvmrc` will do this if you're using `nvm`. If you're on an older version of `npm`, the lockfile should be backwards compatible, but it will update the `package-lock.json` files.
+
 # Running examples
 
 Each example app consists of a backend and frontend.
